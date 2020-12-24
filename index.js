@@ -1,7 +1,7 @@
 //express
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
 //BODY PARSER
 //commented out: (i replaced this with app.use(express.json()))
@@ -28,7 +28,7 @@ const delAsync = promisify(client.del).bind(client);
 
 // let listOfKeys = [];
 
-
+//example usage of client
 // client.set("dinner", "burger");
 // client.get("dinner", function(err, reply) {
 //   console.log(reply);
@@ -87,7 +87,7 @@ app.get('/list', async (req, res) => {
 //post request handler
 app.post('/list', function (req, res) {
   console.log(req.body);
-  client.set(req.body.newItem[0], req.body.newItem[1])
+  client.set(req.body.newItem[0], req.body.newItem[1]) //updates redis db
  
   // res.send(`${req.body.values[0]} saved to database`);
   res.json({
@@ -101,7 +101,7 @@ app.delete('/list', function (req, res) {
   console.log(req.body);
   console.log(req.body.toDelete.length);
   for (i=0;i<req.body.toDelete.length;i++) {
-    delAsync(req.body.toDelete[i]);
+    delAsync(req.body.toDelete[i]); //updates redis db
   }
 
   //does this send body need to be in json? 
@@ -113,6 +113,9 @@ app.delete('/list', function (req, res) {
 })
 
 
+// end
+// 
+//
 //COMMENTED OUT, THIS WAS MY ORIGINAL CODE BUT DID NOT WORK DUE TO ASYNC
 //serves listitems from database
 //THIS WORKS? IS THIS DOING AN AWAIT SOMEHOW?
